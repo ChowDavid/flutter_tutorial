@@ -9,13 +9,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  bool _value1 = false;
-  bool _value2 = false;
+  double _value=0;
 
-  void _onSwitch1(bool value){setState(()=>_value1 = value);}
-  void _onSwitch2(bool value){setState(()=>_value2 = value);}
-
-
+  _setValue(value){setState(() => _value = value);}
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +26,8 @@ class _MyAppState extends State<MyApp> {
           child: Center(
             child: Column(
               children: [
-                Text('Value is $_value1 $_value2'),
-                Switch(value: _value1, onChanged: _onSwitch1),
-                SwitchListTile(value: _value2, onChanged: _onSwitch2,
-                title: Text('Switch 2'),
-                )
+                Text('Value is ${(_value*100).round()}'),
+                Slider(value: _value, onChanged: _setValue),
               ],
             ),
           )
