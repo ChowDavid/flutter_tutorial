@@ -9,20 +9,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  var _value ='Hello World';
+  var _value1 = false;
+  var _value2 = false;
 
-  void _onPress([String message='']){
-    setState(() {
-      _value = message+' change';
-    });
-  }
-  void _onSubmit([String message='']){
-    setState(() {
-      _value = message+' submit';
-    });
-  }
+  void _onCheck1(bool value){ setState(()=> _value1 = value); }
+
+  void _onCheck2(bool value){ setState(()=> _value2 = value); }
+
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -33,116 +29,34 @@ class _MyAppState extends State<MyApp> {
           child: ListView(
             shrinkWrap: true,
             children: [
-              Text(_value),
-              TextField(
-                onChanged: _onPress,
-                onSubmitted: _onSubmit,
-                decoration: InputDecoration(
-                    labelText: 'Email',
-                    hintText: 'HintText',
-                    icon: Icon(Icons.email)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.emailAddress,
+              Checkbox(value: _value1, onChanged: _onCheck1),
+              CheckboxListTile(
+                  value: _value2,
+                  onChanged: _onCheck2,
+                  title: Text('Title'),
+                  subtitle: Text('SubTitle'),
+                  secondary: Icon(Icons.security),
+                controlAffinity: ListTileControlAffinity.leading,
+                activeColor: Colors.red,
               ),
-              TextField(
-                onChanged: _onPress,
-                onSubmitted: _onSubmit,
-                decoration: InputDecoration(
-                    labelText: 'Number',
-                    hintText: 'HintText',
-                    icon: Icon(Icons.phone)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.number,
+              CheckboxListTile(
+                value: _value2,
+                onChanged: _onCheck2,
+                title: Text('Title'),
+                subtitle: Text('SubTitle'),
+                secondary: Icon(Icons.security),
+                controlAffinity: ListTileControlAffinity.trailing,
+                activeColor: Colors.blue,
               ),
-              TextField(
-                onChanged: _onPress,
-                onSubmitted: _onSubmit,
-                decoration: InputDecoration(
-                    labelText: 'Date Time',
-                    hintText: 'HintText',
-                    icon: Icon(Icons.add_alert)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.datetime,
+              CheckboxListTile(
+                value: _value2,
+                onChanged: _onCheck2,
+                title: Text('Title'),
+                subtitle: Text('SubTitle'),
+                secondary: Icon(Icons.security),
+                controlAffinity: ListTileControlAffinity.platform,
+                activeColor: Colors.blue,
               ),
-              TextField(
-                onChanged: _onPress,
-                onSubmitted: _onSubmit,
-                decoration: InputDecoration(
-                    labelText: 'Mulit Line',
-                    hintText: 'HintText',
-                    icon: Icon(Icons.input)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.multiline,
-              ),
-              TextField(
-                onChanged: _onPress,
-                onSubmitted: _onSubmit,
-                decoration: InputDecoration(
-                    labelText: 'Name',
-                    hintText: 'HintText',
-                    icon: Icon(Icons.account_circle)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.name,
-              ),
-              TextField(
-                onChanged: _onPress,
-                onSubmitted: _onSubmit,
-                decoration: InputDecoration(
-                    labelText: 'Street Address',
-                    hintText: 'HintText',
-                    icon: Icon(Icons.domain)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.streetAddress,
-              ),
-              TextField(
-                onChanged: _onPress,
-                onSubmitted: _onSubmit,
-                decoration: InputDecoration(
-                    labelText: 'text',
-                    hintText: 'HintText',
-                    icon: Icon(Icons.input)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.text,
-              ),
-              TextField(
-                onChanged: _onPress,
-                onSubmitted: _onSubmit,
-                decoration: InputDecoration(
-                    labelText: 'URL',
-                    hintText: 'HintText',
-                    icon: Icon(Icons.web)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.url,
-              ),
-              TextField(
-                obscureText: true,
-                onChanged: _onPress,
-                onSubmitted: _onSubmit,
-                decoration: InputDecoration(
-                    labelText: 'Password',
-                    hintText: 'HintText',
-                    icon: Icon(Icons.security)
-                ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.visiblePassword,
-              )
             ],
           ),
         )
