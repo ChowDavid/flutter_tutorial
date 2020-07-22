@@ -11,7 +11,7 @@ class _MyAppState extends State<MyApp> {
 
   var _value ='Hello World';
 
-  void _onPress(String message){
+  void _onPress([String message='']){
     setState(() {
       _value = 'Pressed '+message;
     });
@@ -28,9 +28,8 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: [
               Text(_value),
-              RaisedButton(onPressed: ()=>_onPress('RaisedButton'), child: Text('Click Me')),
-
-
+              //RaisedButton(onPressed: ()=>_onPress('RaisedButton'), child: Text('Click Me')),
+              IconButton(onPressed: _onPress,icon: Icon(Icons.access_alarm)),
 
             ],
           ),
