@@ -11,9 +11,9 @@ class _MyAppState extends State<MyApp> {
 
   var _value ='Hello World';
 
-  void _onPress(){
+  void _onPress(String message){
     setState(() {
-      _value = 'Pressed';
+      _value = 'Pressed '+message;
     });
   }
   @override
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: [
               Text(_value),
-              RaisedButton(onPressed: _onPress, child: Text('Click Me')),
+              RaisedButton(onPressed: ()=>_onPress('RaisedButton'), child: Text('Click Me')),
 
 
 
