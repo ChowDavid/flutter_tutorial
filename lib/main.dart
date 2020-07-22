@@ -28,9 +28,9 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: [
               Text(_value),
-              //RaisedButton(onPressed: ()=>_onPress('RaisedButton'), child: Text('Click Me')),
-              IconButton(onPressed: _onPress,icon: Icon(Icons.access_alarm)),
-
+              RaisedButton(onPressed: ()=>_onPress('RaisedButton'), child: Text('Raised Button')),
+              //IconButton(onPressed: _onPress,icon: Icon(Icons.access_alarm)),
+              FlatButton(onPressed: _onPress,child: Text('Flat Button'))
             ],
           ),
         )
