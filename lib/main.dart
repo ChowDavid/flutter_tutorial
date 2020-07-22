@@ -13,7 +13,7 @@ class _MyAppState extends State<MyApp> {
 
   void _onPress([String message='']){
     setState(() {
-      _value = 'Pressed '+message;
+      _value = message+' Pressed';
     });
   }
   @override
@@ -30,7 +30,19 @@ class _MyAppState extends State<MyApp> {
               Text(_value),
               RaisedButton(onPressed: ()=>_onPress('RaisedButton'), child: Text('Raised Button')),
               //IconButton(onPressed: _onPress,icon: Icon(Icons.access_alarm)),
-              FlatButton(onPressed: _onPress,child: Text('Flat Button'))
+              FlatButton(onPressed: _onPress,child: Text('Flat Button')),
+              CloseButton(onPressed: ()=>_onPress('CloaseButton') ),
+              BackButton(onPressed: ()=>_onPress('BackButton'),),
+              ElevatedButton(onPressed: _onPress,child: Text('ElevatedButton')),
+              FloatingActionButton(onPressed: ()=>_onPress('Floating Action Button'),),
+              //DropdownButton
+              //FloatingActionButton
+              //MaterialButton
+              //OutlineButton
+              //OutlinedButton
+              //PopupMenuButton
+              //RawMaterialButton
+              //TextButton
             ],
           ),
         )
