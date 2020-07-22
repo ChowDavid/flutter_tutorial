@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'dart:async';
 
-void main()=> runApp(MyApp());
+
+void main()=> runApp(MaterialApp(
+  localizationsDelegates: [
+    // ... app-specific localization delegate[s] here
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ],
+  home: MyApp(),
+));
 
 class MyApp extends StatefulWidget {
   @override
@@ -9,15 +20,27 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  double _value=0;
+  DateTime _date = DateTime.now();
 
-  _setValue(value){setState(() => _value = value);}
+  Future<void> _selectDate()  async{
+
+      DateTime selected = await showDatePicker(
+          locale:  Locale("zh","CN"),
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(2016),
+          lastDate: DateTime.now().add(Duration(days:365)));
+      print('Awaiting complete');
+      setState(() {
+        print('Refresh page');
+        _date = selected;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('Name here'),
         ),
@@ -26,14 +49,13 @@ class _MyAppState extends State<MyApp> {
           child: Center(
             child: Column(
               children: [
-                Text('Value is ${(_value*100).round()}'),
-                Slider(value: _value, onChanged: _setValue),
+                Text('Selected Date is ${_date}'),
+                RaisedButton(onPressed:_selectDate,child: Text('Selected Date'),)
               ],
             ),
           )
         )
-      )
-    );
+      );
   }
 }
 
