@@ -13,7 +13,12 @@ class _MyAppState extends State<MyApp> {
 
   void _onPress([String message='']){
     setState(() {
-      _value = message+' Pressed';
+      _value = message+' change';
+    });
+  }
+  void _onSubmit([String message='']){
+    setState(() {
+      _value = message+' submit';
     });
   }
   @override
@@ -25,24 +30,119 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Container(
           padding: EdgeInsets.all(32),
-          child: Column(
+          child: ListView(
+            shrinkWrap: true,
             children: [
               Text(_value),
-              RaisedButton(onPressed: ()=>_onPress('RaisedButton'), child: Text('Raised Button')),
-              //IconButton(onPressed: _onPress,icon: Icon(Icons.access_alarm)),
-              FlatButton(onPressed: _onPress,child: Text('Flat Button')),
-              CloseButton(onPressed: ()=>_onPress('CloaseButton') ),
-              BackButton(onPressed: ()=>_onPress('BackButton'),),
-              ElevatedButton(onPressed: _onPress,child: Text('ElevatedButton')),
-              FloatingActionButton(onPressed: ()=>_onPress('Floating Action Button'),),
-              //DropdownButton
-              //FloatingActionButton
-              //MaterialButton
-              //OutlineButton
-              //OutlinedButton
-              //PopupMenuButton
-              //RawMaterialButton
-              //TextButton
+              TextField(
+                onChanged: _onPress,
+                onSubmitted: _onSubmit,
+                decoration: InputDecoration(
+                    labelText: 'Email',
+                    hintText: 'HintText',
+                    icon: Icon(Icons.email)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.emailAddress,
+              ),
+              TextField(
+                onChanged: _onPress,
+                onSubmitted: _onSubmit,
+                decoration: InputDecoration(
+                    labelText: 'Number',
+                    hintText: 'HintText',
+                    icon: Icon(Icons.phone)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.number,
+              ),
+              TextField(
+                onChanged: _onPress,
+                onSubmitted: _onSubmit,
+                decoration: InputDecoration(
+                    labelText: 'Date Time',
+                    hintText: 'HintText',
+                    icon: Icon(Icons.add_alert)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.datetime,
+              ),
+              TextField(
+                onChanged: _onPress,
+                onSubmitted: _onSubmit,
+                decoration: InputDecoration(
+                    labelText: 'Mulit Line',
+                    hintText: 'HintText',
+                    icon: Icon(Icons.input)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.multiline,
+              ),
+              TextField(
+                onChanged: _onPress,
+                onSubmitted: _onSubmit,
+                decoration: InputDecoration(
+                    labelText: 'Name',
+                    hintText: 'HintText',
+                    icon: Icon(Icons.account_circle)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.name,
+              ),
+              TextField(
+                onChanged: _onPress,
+                onSubmitted: _onSubmit,
+                decoration: InputDecoration(
+                    labelText: 'Street Address',
+                    hintText: 'HintText',
+                    icon: Icon(Icons.domain)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.streetAddress,
+              ),
+              TextField(
+                onChanged: _onPress,
+                onSubmitted: _onSubmit,
+                decoration: InputDecoration(
+                    labelText: 'text',
+                    hintText: 'HintText',
+                    icon: Icon(Icons.input)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.text,
+              ),
+              TextField(
+                onChanged: _onPress,
+                onSubmitted: _onSubmit,
+                decoration: InputDecoration(
+                    labelText: 'URL',
+                    hintText: 'HintText',
+                    icon: Icon(Icons.web)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.url,
+              ),
+              TextField(
+                obscureText: true,
+                onChanged: _onPress,
+                onSubmitted: _onSubmit,
+                decoration: InputDecoration(
+                    labelText: 'Password',
+                    hintText: 'HintText',
+                    icon: Icon(Icons.security)
+                ),
+                autocorrect: true,
+                autofocus: true,
+                keyboardType: TextInputType.visiblePassword,
+              )
             ],
           ),
         )
