@@ -5,7 +5,6 @@ import 'dart:async';
 
 void main()=> runApp(MaterialApp(
   localizationsDelegates: [
-    // ... app-specific localization delegate[s] here
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -20,42 +19,65 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  DateTime _date = DateTime.now();
+  int _value;
+  void _add(){
+    setState(() {
+      _value++;
+    });
+  }
+  void _sub(){
+    setState(() {
+      _value--;
+    });
+  }
 
-  Future<void> _selectDate()  async{
+  void _clear(){setState(() {
+    _value = 0;
+  });}
 
-      DateTime selected = await showDatePicker(
-          locale:  Locale("zh","CN"),
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime(2016),
-          lastDate: DateTime.now().add(Duration(days:365)));
-      print('Awaiting complete');
-      setState(() {
-        print('Refresh page');
-        _date = selected;
-      });
+
+  @override
+  void initState() {
+    _value =0;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
-          title: Text('Name here'),
-        ),
-        body: Container(
-          padding: EdgeInsets.all(32),
-          child: Center(
-            child: Column(
-              children: [
-                Text('Selected Date is ${_date}'),
-                RaisedButton(onPressed:_selectDate,child: Text('Selected Date'),)
-              ],
-            ),
-          )
-        )
-      );
+          //Label text
+          titleSpacing: 10,
+          title: Text('Hello $_value'),
+          centerTitle: true,
+
+
+
+          actionsIconTheme: IconThemeData(color: Colors.blue,opacity: 0.9),
+          actions: [
+            IconButton(icon: Icon(Icons.add), onPressed: _add,iconSize: 30,),
+            IconButton(icon: Icon(Icons.remove), onPressed: _sub,iconSize: 30,)
+          ],
+          automaticallyImplyLeading: false,
+
+
+          //leading icon
+          iconTheme: IconThemeData(color: Colors.green,opacity: 0.9),
+          leading: IconButton(onPressed: _clear, icon: Icon(Icons.clear), iconSize: 50,),
+
+          //overall appBar
+          elevation: 0,
+          backgroundColor: Colors.red,
+
+
+          toolbarOpacity: 0.9,
+          toolbarHeight: 100,
+          shape: RoundedRectangleBorder(
+              side: BorderSide(width: 5,color: Colors.amberAccent, style: BorderStyle.solid),
+              borderRadius: BorderRadius.circular(30)),
+
+          ),
+
+        );
   }
 }
 
