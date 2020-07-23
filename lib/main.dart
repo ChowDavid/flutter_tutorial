@@ -49,18 +49,16 @@ class _MyAppState extends State<MyApp> {
           title: Text('Hello $_value'),
           centerTitle: true,
           ),
-      drawer: Drawer(
-        child: Container(
-          padding: EdgeInsets.all(32),
-          child: Column(
-            children: [
-              Text('Hello Drawer'),
-              Text('Hello Drawer 2'),
-              RaisedButton(onPressed: ()=>Navigator.pop(context),child: Text('Close'),),
-            ],
-          ),
-        ),
-      ),
+      persistentFooterButtons: [
+        IconButton(icon: Icon(Icons.add), onPressed: _add, iconSize: 12,),
+        IconButton(icon: Icon(Icons.remove), onPressed: _sub, color: Colors.red,),
+        IconButton(icon: Icon(Icons.alarm), onPressed: _add,hoverColor: Colors.green,),
+        IconButton(icon: Icon(Icons.android), onPressed: _sub, focusColor: Colors.blue,),
+        IconButton(icon: Icon(Icons.web), onPressed: _add,highlightColor: Colors.amber,),
+        IconButton(icon: Icon(Icons.clear), onPressed: _sub),
+        IconButton(icon: Icon(Icons.domain), onPressed: _add),
+      ],
+
 
 
 
