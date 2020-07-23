@@ -49,13 +49,20 @@ class _MyAppState extends State<MyApp> {
           title: Text('Hello $_value'),
           centerTitle: true,
           ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _add,
-        child: Icon(Icons.add),
-        backgroundColor: Colors.green,
-        mini: false,
-        foregroundColor: Colors.red,
-)
+      drawer: Drawer(
+        child: Container(
+          padding: EdgeInsets.all(32),
+          child: Column(
+            children: [
+              Text('Hello Drawer'),
+              Text('Hello Drawer 2'),
+              RaisedButton(onPressed: ()=>Navigator.pop(context),child: Text('Close'),),
+            ],
+          ),
+        ),
+      ),
+
+
 
         );
   }
