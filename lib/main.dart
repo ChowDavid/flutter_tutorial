@@ -46,36 +46,16 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
         appBar: AppBar(
           //Label text
-          titleSpacing: 10,
           title: Text('Hello $_value'),
           centerTitle: true,
-
-
-
-          actionsIconTheme: IconThemeData(color: Colors.blue,opacity: 0.9),
-          actions: [
-            IconButton(icon: Icon(Icons.add), onPressed: _add,iconSize: 30,),
-            IconButton(icon: Icon(Icons.remove), onPressed: _sub,iconSize: 30,)
-          ],
-          automaticallyImplyLeading: false,
-
-
-          //leading icon
-          iconTheme: IconThemeData(color: Colors.green,opacity: 0.9),
-          leading: IconButton(onPressed: _clear, icon: Icon(Icons.clear), iconSize: 50,),
-
-          //overall appBar
-          elevation: 0,
-          backgroundColor: Colors.red,
-
-
-          toolbarOpacity: 0.9,
-          toolbarHeight: 100,
-          shape: RoundedRectangleBorder(
-              side: BorderSide(width: 5,color: Colors.amberAccent, style: BorderStyle.solid),
-              borderRadius: BorderRadius.circular(30)),
-
           ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _add,
+        child: Icon(Icons.add),
+        backgroundColor: Colors.green,
+        mini: false,
+        foregroundColor: Colors.red,
+)
 
         );
   }
