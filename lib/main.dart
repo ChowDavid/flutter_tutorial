@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,6 +22,27 @@ class _MyAppState extends State<MyApp> {
   int _index;
   String _value;
 
+//method
+  void _showBottom(){
+    showModalBottomSheet(
+        isDismissible: false,
+        enableDrag : false,
+        context: context,
+        builder: (context){
+          return Container(
+            height: 600,
+            padding:  EdgeInsets.all(15),
+            child:  Row(
+              mainAxisAlignment:  MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Some info here', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                RaisedButton(onPressed: ()=>Navigator.pop(context), child: Text('Close'),)
+
+              ],
+            ),
+          );
+        });
+  }
 
   @override
   void initState() {
@@ -56,6 +78,10 @@ class _MyAppState extends State<MyApp> {
           setState(() {
             _index = item;
             _value='Current value is $_index';
+            switch(_index){
+              case 0:_showBottom();break;
+              default : break;
+            }
           });
         },
       )
