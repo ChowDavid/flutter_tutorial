@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'dart:async';
 
-
-void main()=> runApp(MaterialApp(
-  localizationsDelegates: [
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ],
-  home: MyApp(),
-));
+void main() {
+  runApp(MaterialApp(
+    title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+    home: MyApp(),));
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -19,50 +17,52 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  int _value;
-  void _add(){
-    setState(() {
-      _value++;
-    });
-  }
-  void _sub(){
-    setState(() {
-      _value--;
-    });
-  }
-
-  void _clear(){setState(() {
-    _value = 0;
-  });}
+  List<BottomNavigationBarItem> _items;
+  int _index;
+  String _value;
 
 
   @override
   void initState() {
-    _value =0;
+    _value='';
+    _index=0;
+    _items=new List<BottomNavigationBarItem>();
+    _items.add(BottomNavigationBarItem(icon: Icon(Icons.access_alarm), title: Text('Alarm')));
+    _items.add(BottomNavigationBarItem(icon: Icon(Icons.weekend),title: Text('WeekEnd')));
+    _items.add(BottomNavigationBarItem(icon: Icon(Icons.people),title: Text('People')));
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          //Label text
-          title: Text('Hello $_value'),
-          centerTitle: true,
-          ),
-      persistentFooterButtons: [
-        IconButton(icon: Icon(Icons.add), onPressed: _add, iconSize: 12,),
-        IconButton(icon: Icon(Icons.remove), onPressed: _sub, color: Colors.red,),
-        IconButton(icon: Icon(Icons.alarm), onPressed: _add,hoverColor: Colors.green,),
-        IconButton(icon: Icon(Icons.android), onPressed: _sub, focusColor: Colors.blue,),
-        IconButton(icon: Icon(Icons.web), onPressed: _add,highlightColor: Colors.amber,),
-        IconButton(icon: Icon(Icons.clear), onPressed: _sub),
-        IconButton(icon: Icon(Icons.domain), onPressed: _add),
+      appBar: AppBar(
+        title: Text('AppBar'),
+      ),
+      body: Text('$_value'),
+      persistentFooterButtons: <Widget>[
+        IconButton(icon: Icon(Icons.add),),
+        IconButton(icon: Icon(Icons.remove),),
+        IconButton(icon: Icon(Icons.close),),
+        IconButton(icon: Icon(Icons.email),),
       ],
+      bottomNavigationBar: BottomNavigationBar(
+        items: _items,
+        fixedColor: Colors.blue,
+        backgroundColor: Colors.deepOrangeAccent,
+        unselectedItemColor: Colors.blue[100],
+        currentIndex: _index,
+        onTap: (item){
+          setState(() {
+            _index = item;
+            _value='Current value is $_index';
+          });
+        },
+      )
 
 
-
-
-        );
+    );
   }
 }
+
 
