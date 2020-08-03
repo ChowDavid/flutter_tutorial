@@ -15,16 +15,19 @@ void main() {
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
+
+
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
 
+  AppLifecycleState _state;
   List<BottomNavigationBarItem> _items;
   int _index;
   String _value;
 
 //method
-  void _showBottom(){
+  void _showBottom(BuildContext context){
     showModalBottomSheet(
         isDismissible: false,
         enableDrag : false,
@@ -46,7 +49,17 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    setState(() {
+      _state = state;
+      print('Stage changed $state');
+    });
+  }
+
+  @override
   void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _value='';
     _index=0;
     _items=new List<BottomNavigationBarItem>();
@@ -54,15 +67,26 @@ class _MyAppState extends State<MyApp> {
     _items.add(BottomNavigationBarItem(icon: Icon(Icons.weekend),title: Text('WeekEnd')));
     _items.add(BottomNavigationBarItem(icon: Icon(Icons.people),title: Text('People')));
 
+
+  }
+
+  @override
+  void dispose(){
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('this context ${context.hashCode}, super context ${super.context.hashCode}');
     return Scaffold(
       appBar: AppBar(
         title: Text('AppBar'),
       ),
-      body: Text('$_value'),
+      body: Column(children:[
+        Text('$_value'),
+        Text('State $_state')
+      ]),
       persistentFooterButtons: <Widget>[
         IconButton(icon: Icon(Icons.add),),
         IconButton(icon: Icon(Icons.remove),),
@@ -80,7 +104,7 @@ class _MyAppState extends State<MyApp> {
             _index = item;
             _value='Current value is $_index';
             switch(_index){
-              case 0:_showBottom();break;
+              case 0:_showBottom(context);break;
               default : break;
             }
           });
