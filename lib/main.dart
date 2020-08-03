@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
   List<BottomNavigationBarItem> _items;
   int _index;
   String _value;
+  GlobalKey<ScaffoldState> _scaffSnackBar ;
 
 //method
   void _showBottom(BuildContext context){
@@ -48,6 +49,15 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
         });
   }
 
+  void _showSnackBar(){
+    _scaffSnackBar.currentState.showSnackBar(SnackBar(
+      content: Text('Hello SnackBar'),
+    duration: Duration(milliseconds: 5),));
+  }
+
+
+
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     setState(() {
@@ -66,6 +76,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
     _items.add(BottomNavigationBarItem(icon: Icon(Icons.access_alarm), title: Text('Alarm')));
     _items.add(BottomNavigationBarItem(icon: Icon(Icons.weekend),title: Text('WeekEnd')));
     _items.add(BottomNavigationBarItem(icon: Icon(Icons.people),title: Text('People')));
+    _scaffSnackBar = GlobalKey<ScaffoldState>();
 
 
   }
@@ -80,6 +91,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
   Widget build(BuildContext context) {
     print('this context ${context.hashCode}, super context ${super.context.hashCode}');
     return Scaffold(
+      key: _scaffSnackBar,
       appBar: AppBar(
         title: Text('AppBar'),
       ),
@@ -105,6 +117,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
             _value='Current value is $_index';
             switch(_index){
               case 0:_showBottom(context);break;
+              case 1: _showSnackBar();break;
               default : break;
             }
           });
